@@ -1,0 +1,31 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <https://schema.org/rules> .
+@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
+
+:PlacingMachineryLabRule
+    rdf:type :Rule ;
+    :description "Rule to place the machinery lab in a room without columns with high node reactions." ;
+    :hasCondition [
+        rdf:type :Condition ;
+        :hasBar ?bar ;
+        :hasNodeReaction ?nodeReaction ;
+        :nodeReactionUZ ?uz ;
+        :hasPosition ?pos ;
+        :hasEndNode ?bar ;
+        :hasPosition ?pos ;
+        :hasRoom ?room ;
+        :roomName "MachineryLab" ;
+        :hasBoundary ?boundary ;
+        :hasPoints ?pointBoundary ;
+        :xCoordinate ?x ;
+        :yCoordinate ?y ;
+        swrlb:greaterThanOrEqual ?x ?minX ;
+        swrlb:lessThanOrEqual ?x ?maxX ;
+        swrlb:greaterThanOrEqual ?y ?minY ;
+        swrlb:lessThanOrEqual ?y ?maxY ;
+        swrlb:greaterThanOrEqual ?uz ?maxNodeReaction
+    ] ;
+    :hasConsequence [
+        rdf:type :Consequence ;
+        :isLocatedIn ?bar :room
+    ] .    
